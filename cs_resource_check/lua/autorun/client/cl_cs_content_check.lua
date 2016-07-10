@@ -35,7 +35,6 @@ net.Receive( "cscontentcheck_check", function()
 	end
 	
 	net.Start( "cscontentcheck_response" )
-	net.WriteString( LocalPlayer():SteamID() )
 	net.WriteString( checktype )
 	net.WriteBool( result )
 	net.SendToServer()
