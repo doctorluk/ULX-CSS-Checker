@@ -19,7 +19,7 @@ function checkFile( filelist )
 	
 end
 
-net.Receive( "cscontentcheck_check", function( net_response )
+net.Receive( "cscontentcheck_check", function()
 
 	local checktype = net.ReadString()
 	local filelist = net.ReadTable()
