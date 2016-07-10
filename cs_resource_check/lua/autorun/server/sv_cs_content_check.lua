@@ -9,10 +9,8 @@ util.AddNetworkString( "cscontentcheck_check" )
 util.AddNetworkString( "cscontentcheck_response" )
 
 
-net.Receive( "cscontentcheck_response", function( len )
+net.Receive( "cscontentcheck_response", function( len, ply )
 	
-	local steamid = net.ReadString()
-	local ply = player.GetBySteamID( steamid )
 	local type = net.ReadString()
 	local response = net.ReadBool()
 	

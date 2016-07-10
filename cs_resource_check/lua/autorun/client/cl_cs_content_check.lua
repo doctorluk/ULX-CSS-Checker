@@ -19,7 +19,7 @@ function checkFile( filelist )
 	
 end
 
-net.Receive( "cscontentcheck_check", function( net_response )
+net.Receive( "cscontentcheck_check", function()
 
 	local checktype = net.ReadString()
 	local filelist = net.ReadTable()
@@ -35,7 +35,6 @@ net.Receive( "cscontentcheck_check", function( net_response )
 	end
 	
 	net.Start( "cscontentcheck_response" )
-	net.WriteString( LocalPlayer():SteamID() )
 	net.WriteString( checktype )
 	net.WriteBool( result )
 	net.SendToServer()
