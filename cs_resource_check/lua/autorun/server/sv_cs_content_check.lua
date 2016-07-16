@@ -35,6 +35,7 @@ if SERVER then
 				end
 			end
 			-- The player gets kicked if CS:S is not found
+			ServerLog("[CSS CHECK] Kicking player " .. ply:Nick() .. " for missing file " .. filename .. "\n")
 			game.KickID( ply:SteamID(), CS_CHECK_KICK_REASON )
 		end
 		
@@ -46,28 +47,27 @@ if SERVER then
 		-- By default (on first call) we check whether the player has mounted CS:S
 		local checktype = checktype or "mount"
 		
-		timer.Simple( 1, function()
-			-- print(os.date("%X") ..  " Sending client check for '" .. checktype .. "'")
-			net.Start( "cscontentcheck_check" )
+		net.Start( "cscontentcheck_check" )
+		
+		-- First check is via mount, therefore the filetable is empty
+		if checktype == "mount" then
+			net.WriteString( checktype )
+			net.WriteTable( {} )
+			net.WriteBool( CS_CHECK_DEBUG )
+			net.Send( ply )
+		-- If mount fails we send a randomly constructed filetable to the client
+		elseif CS_CONTENT_FILES then
+			local filetable = {}
 			
-			-- First check is via mount, therefore the filetable is empty
-			if checktype == "mount" then
-				net.WriteString( checktype )
-				net.WriteTable( {} )
-				net.Send( ply )
-			-- If mount fails we send a randomly constructed filetable to the client
-			elseif CS_CONTENT_FILES then
-				local filetable = {}
-				
-				for i = 0, CS_CHECK_FILE_AMOUNT, 1 do
-					table.insert( filetable, CS_CONTENT_FILES[math.random(table.getn(CS_CONTENT_FILES))] )
-				end
-				
-				net.WriteString( checktype )
-				net.WriteTable( filetable )
-				net.Send( ply )
+			for i = 0, CS_CHECK_FILE_AMOUNT, 1 do
+				table.insert( filetable, CS_CONTENT_FILES[math.random(table.getn(CS_CONTENT_FILES))] )
 			end
-		end )
+			
+			net.WriteString( checktype )
+			net.WriteTable( filetable )
+			net.WriteBool( CS_CHECK_DEBUG )
+			net.Send( ply )
+		end
 	end
 	hook.Add( "PlayerInitialSpawn", "cs_content_check_init", cs_content_check )
 

@@ -11,4 +11,7 @@ if SERVER then
 	-- Number of files to check. Don't go too high with this, otherwise errors may occur
 	CS_CHECK_FILE_AMOUNT = 15
 	
+	-- Set to true to show actively checked files in the chat windows of the player
+	CS_CHECK_DEBUG = true
+	
 end
