@@ -6,9 +6,6 @@ If your server has content installed that requires CS:S to be installed, you can
 1. Check whether a player has mounted CS:S (bought and installed via Steam). If they don't, proceed to 2.
 2. The server randomly sends 15 (by default) file names (from all files that exist in a CS:S installation) to be checked. If any of the files do not exist, the client is kicked
 
-## Requirements
-This addon requires ULib which can be acquired here: http://ulyssesmod.net/
-
 ## How to install
 1. Upload the folder cs_resource_check into your addons folder (usually located at garrysmod\addons)
 
