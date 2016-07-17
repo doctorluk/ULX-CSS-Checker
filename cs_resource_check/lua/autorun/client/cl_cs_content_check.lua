@@ -24,7 +24,7 @@ function checkFile( filelist, isdebug )
 				Color( 160, 160, 160, 255 ), filename,
 				Color( 255, 50, 50, 255 ), " MISSING!" )
 			end
-			print("You are missing file " .. filename "! Please validate your CS:S installation!")
+			print("You are missing file " .. filename .. "! Please validate your CS:S installation!")
 		end
 	end
 	
