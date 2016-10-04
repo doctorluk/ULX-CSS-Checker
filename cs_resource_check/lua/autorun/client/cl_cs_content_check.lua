@@ -12,10 +12,12 @@ function checkFile( filelist, isdebug )
 
 	for _, filename in pairs( filelist ) do
 		local exists = file.Exists( filename, "GAME" )
-		if exists and isdebug then
-			chat.AddText( Color( 255, 255, 200, 255 ), "[CS:S CHECK] ",
-			Color( 160, 160, 160, 255 ), filename,
-			Color( 100, 255, 100, 255 ), " exists!" )
+		if exists then
+			if isdebug then
+				chat.AddText( Color( 255, 255, 200, 255 ), "[CS:S CHECK] ",
+				Color( 160, 160, 160, 255 ), filename,
+				Color( 100, 255, 100, 255 ), " exists!" )
+			end
 		else
 			CS_CONTENT_CHECK_HAS_CSS_INSTALLED = false
 			CS_CONTENT_CHECK_FILE_MISSING = filename
